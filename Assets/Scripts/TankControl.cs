@@ -5,23 +5,39 @@ public class TankControl : MonoBehaviour {
 
 	public float speed = 0.1f;
 
-	// Use this for initialization
+	private GameObject turret;
+
 	void Start () {
-	
+		// Assume first child is turret
+		turret = transform.GetChild(0).gameObject;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		// Control base with left stick
-		float lh = Input.GetAxis("Horizontal");
-		float lv = Input.GetAxis("Vertical");
-		Vector3 move = new Vector3(lh, lv, 0f);
-		if (speed/10f <= move.magnitude) {
-			// Rotate base
-			float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
-			// Move base
-			transform.Translate(move * speed, Space.World);
+		{
+			// Control base with left stick
+			float h = Input.GetAxis("Horizontal");
+			float v = Input.GetAxis("Vertical");
+			Vector3 move = new Vector3(h, v, 0f);
+			if (0f < move.magnitude) {
+				// Rotate
+				float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
+				transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
+				// Move
+				transform.Translate(move * speed, Space.World);
+			}
+		}
+
+		{
+			// Control turret with right stick
+			float h = Input.GetAxis("RightHorizontal");
+			float v = Input.GetAxis("RightVertical");
+			Vector3 move = new Vector3(h, v, 0f);
+			if (0f < move.magnitude) {
+				// Rotate
+				float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
+				turret.transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
+			}
 		}
 	}
+
 }
