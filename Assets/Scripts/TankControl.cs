@@ -5,25 +5,27 @@ public class TankControl : MonoBehaviour {
 
 	public float speed = 0.1f;
 
+	private GameObject body;
 	private GameObject turret;
 
 	void Start () {
-		// Assume first child is turret
+		// Assume game object is body and first child is turret
+		body = gameObject;
 		turret = transform.GetChild(0).gameObject;
 	}
 	
 	void Update () {
 		{
-			// Control base with left stick
+			// Control body with left stick
 			float h = Input.GetAxis("Horizontal");
 			float v = Input.GetAxis("Vertical");
 			Vector3 move = new Vector3(h, v, 0f);
 			if (0f < move.magnitude) {
 				// Rotate
 				float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
-				transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
+				body.transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
 				// Move
-				transform.Translate(move * speed, Space.World);
+				body.transform.Translate(move * speed, Space.World);
 			}
 		}
 
