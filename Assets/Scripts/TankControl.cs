@@ -24,8 +24,7 @@ public class TankControl : MonoBehaviour {
 	}
 	
 	void Update () {
-		// Tank is only controllable while visible
-		if (!renderer.enabled) {
+		if (!gameController.IsPlaying()) {
 			return;
 		}
 

@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 	public AudioClip shootSound;
 	public AudioClip bounceSound;
 
+	public GameObject start;
 	public GameObject gameOver;
 	public GameObject youWin;
 	public GameObject youLose;
@@ -46,6 +47,12 @@ public class GameController : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (start.activeSelf) {
+			// Start game if button is pressed
+			if (Input.anyKeyDown) {
+				StartGame();
+			}
+		}
 		if (gameOver.activeSelf) {
 			// Disable tank1 after a short time (so it can no longer be shot)
 			if (disableTankTime <= Time.time) {
@@ -57,6 +64,10 @@ public class GameController : MonoBehaviour {
 				Restart();
 			}
 		}
+	}
+
+	public bool IsPlaying () {
+		return !start.activeSelf && !gameOver.activeSelf;
 	}
 
 	public void Shoot () {
@@ -108,6 +119,10 @@ public class GameController : MonoBehaviour {
 
 		explosionAudio.Play();
 		EngineIdle();
+	}
+
+	public void StartGame () {
+		start.SetActive(false);
 	}
 
 	public void Restart () {
