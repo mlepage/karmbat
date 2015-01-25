@@ -8,9 +8,8 @@ public class ShotCollider : MonoBehaviour {
 	void Update () {
 		Collider2D other = Physics2D.OverlapCircle(transform.position, 0.15f);
 		if (other && other.CompareTag(targetTag)) {
-			// Destroy the shot
 			Destroy(gameObject);
-			GameObject.FindWithTag("GameController").GetComponent<GameController>().GameOver();
+			GameObject.FindWithTag("GameController").GetComponent<GameController>().GameOver(targetTag.Equals("Player"));
 		}
 	}
 }

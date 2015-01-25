@@ -4,6 +4,8 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
 	public GameObject gameOver;
+	public GameObject youWin;
+	public GameObject youLose;
 
 	public GameObject tank1;
 	public GameObject tank2;
@@ -60,8 +62,10 @@ public class GameController : MonoBehaviour {
 		shotCollider2.targetTag = tank1.tag;
 	}
 
-	public void GameOver () {
+	public void GameOver (bool lose) {
 		gameOver.SetActive(true);
+		youWin.SetActive(!lose);
+		youLose.SetActive(lose);
 
 		tank1.SetActive(false);
 		tank2.SetActive(false);
