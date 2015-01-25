@@ -23,12 +23,15 @@ public class TankControl : MonoBehaviour {
 			float h = Input.GetAxis("Horizontal");
 			float v = Input.GetAxis("Vertical");
 			Vector3 move = new Vector3(h, v, 0f);
+
 			if (0f < move.magnitude) {
 				// Rotate
 				float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
 				body.transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
+
 				// Move
 				body.transform.Translate(move * speed, Space.World);
+
 				if (body.transform.position.magnitude < 1f) {
 					// Too close to center
 					body.transform.position = position;
@@ -41,6 +44,7 @@ public class TankControl : MonoBehaviour {
 			float h = Input.GetAxis("RightHorizontal");
 			float v = Input.GetAxis("RightVertical");
 			Vector3 move = new Vector3(h, v, 0f);
+
 			if (0f < move.magnitude) {
 				// Rotate
 				float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
