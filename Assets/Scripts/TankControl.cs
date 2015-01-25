@@ -8,10 +8,19 @@ public class TankControl : MonoBehaviour {
 	private GameObject body;
 	private GameObject turret;
 
+	private float lastShotTime;
+	private float shotTime = 0.5f;
+
+	private GameController gameController;
+
 	void Start () {
 		// Assume game object is body and first child is turret
 		body = gameObject;
 		turret = transform.GetChild(0).gameObject;
+
+		lastShotTime = Time.time;
+
+		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 	}
 	
 	void Update () {
@@ -49,6 +58,12 @@ public class TankControl : MonoBehaviour {
 				// Rotate
 				float rot = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
 				turret.transform.rotation = Quaternion.Euler(0f, 0f, rot - 90f);
+
+				// Shoot
+				if (lastShotTime + shotTime <= Time.time) {
+					lastShotTime = Time.time;
+					gameController.Shoot();
+				}
 			}
 		}
 	}
