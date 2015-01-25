@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour {
 	private AudioSource explosionAudio;
 	private AudioSource shootAudio;
 
+	private float disableTankTime;
+
 	void Start () {
 		engineAudio = GameObject.FindWithTag("Audio").transform.FindChild("Engine").gameObject.GetComponent<AudioSource>();
 		explosionAudio = GameObject.FindWithTag("Audio").transform.FindChild("Explosion").gameObject.GetComponent<AudioSource>();
@@ -45,6 +47,12 @@ public class GameController : MonoBehaviour {
 	
 	void Update () {
 		if (gameOver.activeSelf) {
+			// Disable tank1 after a short time (so it can no longer be shot)
+			if (disableTankTime <= Time.time) {
+				tank1.SetActive(false);
+			}
+
+			// Restart game if button is pressed
 			if (Input.anyKeyDown) {
 				Restart();
 			}
@@ -85,11 +93,17 @@ public class GameController : MonoBehaviour {
 	}
 	
 	public void GameOver (bool lose) {
+		disableTankTime = Time.time + 0.5f;
+
 		gameOver.SetActive(true);
 		youWin.SetActive(!lose);
 		youLose.SetActive(lose);
 
-		tank1.SetActive(false);
+		// Keep tank1 enabled (so it can be shot) but make it invisible
+		tank1.renderer.enabled = false;
+		turret1.renderer.enabled = false;
+
+		// Disable tank2
 		tank2.SetActive(false);
 
 		explosionAudio.Play();
@@ -98,8 +112,13 @@ public class GameController : MonoBehaviour {
 
 	public void Restart () {
 		gameOver.SetActive(false);
-		
+
+		// Enable tank1 and make it visible
 		tank1.SetActive(true);
+		tank1.renderer.enabled = true;
+		turret1.renderer.enabled = true;
+
+		// Enable tank2
 		tank2.SetActive(true);
 
 		tank1.transform.position = spawnPosition1;

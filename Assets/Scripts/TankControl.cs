@@ -24,6 +24,11 @@ public class TankControl : MonoBehaviour {
 	}
 	
 	void Update () {
+		// Tank is only controllable while visible
+		if (!renderer.enabled) {
+			return;
+		}
+
 		{
 			// Original position in case revert is necessary
 			Vector3 position = body.transform.position;
