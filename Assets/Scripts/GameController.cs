@@ -3,10 +3,13 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+	public AudioClip shootSound;
+	public AudioClip bounceSound;
+
 	public GameObject gameOver;
 	public GameObject youWin;
 	public GameObject youLose;
-
+	
 	public GameObject tank1;
 	public GameObject tank2;
 
@@ -20,7 +23,15 @@ public class GameController : MonoBehaviour {
 	private Quaternion spawnRotation1;
 	private Quaternion spawnRotation2;
 
+	private AudioSource engineAudio;
+	private AudioSource explosionAudio;
+	private AudioSource shootAudio;
+
 	void Start () {
+		engineAudio = GameObject.FindWithTag("Audio").transform.FindChild("Engine").gameObject.GetComponent<AudioSource>();
+		explosionAudio = GameObject.FindWithTag("Audio").transform.FindChild("Explosion").gameObject.GetComponent<AudioSource>();
+		shootAudio = GameObject.FindWithTag("Audio").transform.FindChild("Shoot").gameObject.GetComponent<AudioSource>();
+
 		turret1 = tank1.transform.GetChild(0).gameObject;
 		turret2 = tank2.transform.GetChild(0).gameObject;
 
@@ -60,8 +71,19 @@ public class GameController : MonoBehaviour {
 		shot2.AddComponent<ShotControl>();
 		ShotCollider shotCollider2 = shot2.AddComponent<ShotCollider>();
 		shotCollider2.targetTag = tank1.tag;
+
+		// Play sound
+		shootAudio.Play();
 	}
 
+	public void EngineIdle () {
+		engineAudio.volume = 0.25f;
+	}
+	
+	public void EngineLoud () {
+		engineAudio.volume = 1f;
+	}
+	
 	public void GameOver (bool lose) {
 		gameOver.SetActive(true);
 		youWin.SetActive(!lose);
@@ -69,6 +91,9 @@ public class GameController : MonoBehaviour {
 
 		tank1.SetActive(false);
 		tank2.SetActive(false);
+
+		explosionAudio.Play();
+		EngineIdle();
 	}
 
 	public void Restart () {

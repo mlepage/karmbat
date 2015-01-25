@@ -9,7 +9,7 @@ public class TankControl : MonoBehaviour {
 	private GameObject turret;
 
 	private float lastShotTime;
-	private float shotTime = 0.5f;
+	private float shotTime = 0.25f;
 
 	private GameController gameController;
 
@@ -45,6 +45,10 @@ public class TankControl : MonoBehaviour {
 					// Too close to center
 					body.transform.position = position;
 				}
+
+				gameController.EngineLoud();
+			} else {
+				gameController.EngineIdle();
 			}
 		}
 

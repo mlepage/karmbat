@@ -9,7 +9,10 @@ public class ShotControl : MonoBehaviour {
 
 	private int life = 3;
 
+	private AudioSource bounceAudio;
+
 	void Start () {
+		bounceAudio = GameObject.FindWithTag("Audio").transform.FindChild("Bounce").gameObject.GetComponent<AudioSource>();
 	}
 	
 	void Update () {
@@ -46,6 +49,7 @@ public class ShotControl : MonoBehaviour {
 						forward.x = -forward.x; // bounce horizontally
 					}
 					transform.up = forward;
+					bounceAudio.Play();
 				}
 				inBlock = true;
 			}
