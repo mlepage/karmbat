@@ -13,6 +13,10 @@ public class Doppelganger : MonoBehaviour {
 	public int rotationOffset = 180;
 
 	void LateUpdate () {
+		UpdateDoppelganger();
+	}
+
+	public void UpdateDoppelganger () {
 		if (target == null || target.Equals(null)) {
 			Destroy(gameObject);
 			return;
