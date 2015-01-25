@@ -19,8 +19,14 @@ public class ShotControl : MonoBehaviour {
 		// Move
 		transform.Translate(Vector3.up * speed);
 
+		// Check for out of bounds
+		if (100f <= Mathf.Abs(transform.position.magnitude)) {
+			Destroy(gameObject);
+			return;
+		}
+
 		// Check for collision
-		Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.1f);
+		Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.15f);
 		if (collider) {
 			if (collider.name == "ArenaBlock") {
 				if (!inBlock) {
