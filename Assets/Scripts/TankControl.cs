@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class TankControl : MonoBehaviour {
 
@@ -28,13 +29,16 @@ public class TankControl : MonoBehaviour {
 			return;
 		}
 
+		// Use InControl for input
+		InputDevice device = InputManager.ActiveDevice;
+		
 		{
 			// Original position in case revert is necessary
 			Vector3 position = body.transform.position;
 
 			// Control body with left stick
-			float h = Input.GetAxis("Horizontal");
-			float v = Input.GetAxis("Vertical");
+			float h = device.LeftStickX;
+			float v = device.LeftStickY;
 			Vector3 move = new Vector3(h, v, 0f);
 
 			if (0f < move.magnitude) {
@@ -58,8 +62,8 @@ public class TankControl : MonoBehaviour {
 
 		{
 			// Control turret with right stick
-			float h = Input.GetAxis("RightHorizontal");
-			float v = Input.GetAxis("RightVertical");
+			float h = device.RightStickX;
+			float v = device.RightStickY;
 			Vector3 move = new Vector3(h, v, 0f);
 
 			if (0f < move.magnitude) {

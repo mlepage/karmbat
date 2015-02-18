@@ -30,7 +30,7 @@ You can play Karmbat online in your browser using the Unity Web Player [here][5]
 How to Play
 -----------
 
-Your tank is blue; the enemy's tank is red. Effectively, you control both tanks: left stick moves, right stick shoots.
+Your tank is blue; the enemy's tank is red. Effectively, you control both tanks: left stick moves, right stick shoots. You can also use keys ESDF and IJKL.
 
 Shots bounce off the arena's walls a few times, and only hit the enemy.
 
@@ -38,8 +38,6 @@ Your goal is to shoot the enemy without being shot yourself. Good luck.
 
 Known Issues
 ------------
-
-The game is currently configured for a Sony DualShock 3 PS3 controller. Your mileage may vary. Keyboard allows movement using WASD or cursor keys, but there's no way to shoot until I update the code.
 
 The red tank's turret glitches. This does not affect shots. This started occurring sometime during development and I did not have time to fix it.
 
@@ -57,26 +55,29 @@ License
 
 Karmbat is licensed under the [Apache License, Version 2.0][7].
 
+InControl is a third-party library with its own license, see README-InControl.md for details.
+
 [7]: http://www.apache.org/licenses/LICENSE-2.0
 
 Technology Notes
 ----------------
 
-The game was made in [Unity][8] using the C# programming language. The art was made with [Pixelmator][9]. The audio was made with [Bfxr][10] and [Audacity][11].
+The game was made in [Unity][8] using the C# programming language. The art was made with [Pixelmator][9]. The audio was made with [Bfxr][10] and [Audacity][11]. Input is controlled with the free version of [InControl][12].
 
 [8]: http://unity3d.com/
 [9]: http://www.pixelmator.com/
 [10]: http://www.bfxr.net/
 [11]: http://audacity.sourceforge.net/
+[12]: http://www.gallantgames.com/pages/incontrol-introduction
 
 By the Same Author
 ------------------
 
-Alpha Memory is a memory game for children, featuring letters to help them learn the alphabet. It's free on [BlackBerry World][12] for BlackBerry 10 phones and PlayBook tablets. The source code is available on [github][13].
+Alpha Memory is a memory game for children, featuring letters to help them learn the alphabet. It's free on [BlackBerry World][13] for BlackBerry 10 phones and PlayBook tablets. The source code is available on [github][14].
 
-NeverMaze is a touch maze game for all ages, featuring a variety of maze generation algorithms and dynamically adjusting difficulty. It's available on [Google Play][14] for Android phones and tablets, and [BlackBerry World][15] for BlackBerry 10 phones and PlayBook tablets.
+NeverMaze is a touch maze game for all ages, featuring a variety of maze generation algorithms and dynamically adjusting difficulty. It's available on [Google Play][15] for Android phones and tablets, and [BlackBerry World][16] for BlackBerry 10 phones and PlayBook tablets.
 
-[12]: http://appworld.blackberry.com/webstore/content/29617896/
-[13]: https://github.com/mlepage/memory-game
-[14]: https://play.google.com/store/apps/details?id=com.krungie.sliderpuzzle
-[15]: http://appworld.blackberry.com/webstore/content/29783887/
+[13]: http://appworld.blackberry.com/webstore/content/29617896/
+[14]: https://github.com/mlepage/memory-game
+[15]: https://play.google.com/store/apps/details?id=com.krungie.sliderpuzzle
+[16]: http://appworld.blackberry.com/webstore/content/29783887/
